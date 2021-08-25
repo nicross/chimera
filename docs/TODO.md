@@ -1,0 +1,22 @@
+# TODO
+- Chords
+  - Select a drone note and key via seeded PRNG
+  - Drone note is present in all chords (any MIDI note between C4 and C5)
+  - Calculate all chords with harmonics containing the drone note
+  - Essentially, where it is the root, third, fifth, or ninth
+  - Determine chord via noise field choosing from this mapping
+- Chunk generation
+  - Noise field for chunk density
+  - Note selection via chord module
+- Drones
+  - Determine nearest notes via spawner and spawn them
+- Movement
+  - Controls
+  - Movement model
+  - Footstep synths
+- Props
+  - Note selection and spawning
+- Wind
+  - Radial noise field, in 3D (sin(atan2(y, x)), distance(x, y), time)
+  - Spanwer frequency
+  - Synth
