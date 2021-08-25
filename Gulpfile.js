@@ -134,6 +134,7 @@ function getJs() {
 function getAppJs() {
   const srcs = [
     'src/js/app.js',
+    'src/js/app/utility/*.js',
     'src/js/app/*.js',
     'src/js/app/**/*.js',
   ]
@@ -144,6 +145,7 @@ function getAppJs() {
 function getContentJs() {
   const srcs = [
     'src/js/content.js',
+    'src/js/content/utility/*.js',
     'src/js/content/*.js',
     'src/js/content/**/*.js',
   ]
