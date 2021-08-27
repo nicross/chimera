@@ -55,5 +55,6 @@ These fonts are free for noncommercial use and not covered by the license of thi
 
 - **Error Stencil** by Isaac González
 - **Fira Mono** by Mozilla
+- **Roboto** by Google
 
 Thanks for playing!

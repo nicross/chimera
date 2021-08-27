@@ -10,3 +10,9 @@
   font-weight: 400;
   src: url('font/firamono-regular.woff') format('woff');
 }
+@font-face {
+  font-family: RobotoRegular;
+  font-style: normal;
+  font-weight: 400;
+  src: url('font/firamono-regular.woff') format('woff');
+}
