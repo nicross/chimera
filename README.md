@@ -49,3 +49,11 @@ gulp dev
 | Flag | Description |
 | - | - |
 | `--debug` | Suppresses minification. |
+
+## Credits
+These fonts are free for noncommercial use and not covered by the license of this project:
+
+- **Error Stencil** by Isaac González
+- **Fira Mono** by Mozilla
+
+Thanks for playing!
