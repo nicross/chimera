@@ -1,5 +1,5 @@
 app.screen.game.canvas = (() => {
-  const drawDistance = 100,
+  const drawDistance = 200,
     vfov = engine.utility.degreesToRadians(75) * (9/16)
 
   let chimeWidth,
@@ -75,7 +75,7 @@ app.screen.game.canvas = (() => {
       }
 
       // Calculate width
-      let drawWidth = engine.utility.lerpExp(0.25, chimeWidth, 1 - (distance / drawDistance), 8)
+      let drawWidth = engine.utility.lerpExp(0, chimeWidth, 1 - (distance / drawDistance), 8)
 
       if (chime.lastStrike) {
         const delta = now - chime.lastStrike

@@ -2,7 +2,7 @@ content.generator = (() => {
   const chunks = [],
     chunkSize = 50,
     chunkTree = engine.utility.quadtree.create(),
-    streamRadius = 3
+    streamRadius = 4
 
   function createChunk(options) {
     const chunk = content.generator.chunk.create({
