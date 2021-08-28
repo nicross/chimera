@@ -2,10 +2,15 @@ app.screen.game.canvas = (() => {
   const drawDistance = 200,
     vfov = engine.utility.degreesToRadians(75) * (9/16)
 
-  let chimeWidth,
+  let analogPhase,
+    analogSide,
+    analogSign,
+    chimeWidth,
     context,
     height,
     hfov,
+    rotatePhase,
+    rotateSign,
     root,
     width
 
@@ -19,6 +24,25 @@ app.screen.game.canvas = (() => {
     app.state.screen.on('enter-game', onEnter)
     app.state.screen.on('exit-game', onExit)
   })
+
+  function calculateColors(time) {
+    const analog = analogSide * engine.utility.scale(Math.cos(analogSign * Math.PI * (time + analogPhase) * (1 / 41)), -1, 1, 15, 45),
+      contrast = engine.utility.scale(Math.cos(Math.PI * time * (1 / 59)), -1, 1, 0, 0.5),
+      rotate = engine.utility.scale(Math.cos(rotateSign * Math.PI * (time + rotatePhase) * (1 / 311)), -1, 1, 0, 360)
+
+    return {
+      background: {
+        h: rotate,
+        s: 1,
+        l: 0.5 - contrast,
+      },
+      foreground: {
+        h: analog + rotate,
+        s: 1,
+        l: 0.5 + contrast,
+      },
+    }
+  }
 
   function clear() {
     context.clearRect(0, 0, width, height)
@@ -37,14 +61,17 @@ app.screen.game.canvas = (() => {
       y: position.y - drawDistance,
     })
 
+    const {
+      background,
+      foreground,
+    } = calculateColors(now)
+
     // Fill background
-    // TODO: Calculate background color
-    context.fillStyle = '#000000'
+    context.fillStyle = `hsl(${background.h}, ${background.s * 100}%,  ${background.l * 100}%)`
     context.fillRect(0, 0, width, height)
 
     // Set foreground color
-    // TODO: Calculate foreground color
-    context.fillStyle = '#FFFFFF'
+    context.fillStyle = `hsl(${foreground.h}, ${foreground.s * 100}%,  ${foreground.l * 100}%)`
 
     for (const chime of chimes) {
       // Convert to relative space, adding sway
@@ -94,6 +121,14 @@ app.screen.game.canvas = (() => {
   }
 
   function onEnter() {
+    const srand = engine.utility.srand('canvas');
+
+    analogPhase = srand(0, 41)
+    analogSide = engine.utility.sign(srand(-1, 1))
+    analogSign = engine.utility.sign(srand(-1, 1))
+    rotatePhase = srand(0, 311)
+    rotateSign = engine.utility.sign(srand(-1, 1))
+
     clear()
     engine.loop.on('frame', onFrame)
   }
