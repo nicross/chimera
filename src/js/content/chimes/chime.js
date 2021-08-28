@@ -10,6 +10,9 @@ content.chimes.chime.prototype = {
     x = 0,
     y = 0,
   } = {}) {
+    this.swayFrequency = engine.utility.random.float(1/8, 1)
+    this.swaySign = engine.utility.random.sign()
+
     this.notes = notes
     this.x = x
     this.y = y

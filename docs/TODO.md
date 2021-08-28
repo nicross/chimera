@@ -1,11 +1,7 @@
 # TODO
 - Chord module that generates new chords each seed
 - Drone synths
-- Strike synths
 - Graphics
-  - Use hfov to easily support widescreen displays
-  - Represent each chime as a vertical line that gets wider when closer
-  - Use chime.lastStrike to animate width
   - Duotone colors that rotate hue over time
 - Footsteps
 - Submit to Rainbow Jam 2021 (possibly Brackeys Game Jam 2021.2)

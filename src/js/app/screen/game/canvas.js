@@ -47,11 +47,11 @@ app.screen.game.canvas = (() => {
     context.fillStyle = '#FFFFFF'
 
     for (const chime of chimes) {
-      // Convert to relative space
+      // Convert to relative space, adding sway
       const relative = engine.utility.vector2d.create({
-        x: chime.x - position.x,
-        y: chime.y - position.y,
-      }).subtract(position).rotate(rotate)
+        x: chime.x - position.x + (Math.cos(Math.PI * chime.swayFrequency * chime.swaySign * now) / 32),
+        y: chime.y - position.y + (Math.sin(Math.PI * chime.swayFrequency * chime.swaySign * now) / 32),
+      }).rotate(rotate)
 
       // Filter out chimes behind field of view
       if (relative.x <= 0) {
