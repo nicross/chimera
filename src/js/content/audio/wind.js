@@ -4,7 +4,7 @@ content.audio.wind = (() => {
   let binaural,
     synth
 
-  bus.gain.value = engine.utility.fromDb(-3)
+  bus.gain.value = engine.utility.fromDb(-9)
 
   function calculateFrequency(strength) {
     return engine.utility.lerpExp(10, 200, strength, 3)
