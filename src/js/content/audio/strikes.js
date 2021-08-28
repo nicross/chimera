@@ -1,6 +1,6 @@
 content.audio.strikes = (() => {
   const bus = content.audio.createBus(),
-    maxProps = 8,
+    maxProps = 12,
     pubsub = engine.utility.pubsub.create(),
     radius = 25
 

@@ -19,7 +19,7 @@ content.prop.strike = engine.prop.base.invent({
 
     const now = engine.audio.time()
 
-    synth.param.gain.linearRampToValueAtTime(1, now + duration/8)
+    synth.param.gain.linearRampToValueAtTime(1, now + engine.utility.random.float(1/64, 1/32))
     synth.param.gain.exponentialRampToValueAtTime(engine.const.zeroGain, now + duration)
 
     synth.stop(now + duration)

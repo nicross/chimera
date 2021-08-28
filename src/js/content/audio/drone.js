@@ -1,6 +1,6 @@
 content.audio.drone = (() => {
   const bus = content.audio.createBus(),
-    maxNotes = 10,
+    maxNotes = 12,
     notes = [],
     synths = new Map()
 
