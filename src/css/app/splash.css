@@ -1,5 +1,7 @@
 .a-splash {
   align-items: center;
+  animation: a-splash-in 1s linear 0s 1 normal both;
+  opacity: 0;
   text-align: center;
 }
   .a-splash--instruction {
@@ -27,6 +29,15 @@
     line-height: 0.75;
   }
 
+@keyframes a-splash-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 @keyframes a-splash--instruction {
   0% {
     opacity: 0.5;
@@ -42,5 +53,74 @@
   }
   .a-splash--title {
     font-size: 16em;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .a-app--screen-inactive .a-splash {
+    overflow: hidden;
+  }
+
+  .a-app--screen-inactive .a-splash--instruction {
+    animation: a-splash--instruction-out 0.125s linear 0s 1 normal both;
+  }
+
+  .a-splash--row {
+    animation: a-splash--row-in 1s ease 0s 1 normal both;
+  }
+  .a-app--screen-inactive .a-splash--row {
+    animation: a-splash--row-out 0.125s linear 0s 1 normal both;
+  }
+
+  .a-splash--title {
+    animation: a-splash--title-in 1s linear 0s 1 normal both;
+  }
+  .a-app--screen-inactive .a-splash--title {
+    animation: a-splash--title-out 1s linear 0s 1 normal both;
+  }
+
+  @keyframes a-splash--instruction-out {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes a-splash--row-in {
+    0% {
+      transform: translateY(4em);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes a-splash--row-out {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes a-splash--title-in {
+    0% {
+      transform: scale(0.875);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes a-splash--title-out {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(8);
+    }
   }
 }

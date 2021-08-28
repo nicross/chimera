@@ -8,6 +8,5 @@
   - Represent each chime as a vertical line that gets wider when closer
   - Use chime.lastStrike to animate width
   - Duotone colors that rotate hue over time
-- Transition from splash screen
 - Footsteps
-- Submit to Rainbow Jam 2021
+- Submit to Rainbow Jam 2021 (possibly Brackeys Game Jam 2021.2)

@@ -59,3 +59,10 @@ app.state.screen.on('enter', (e) => {
   element.removeAttribute('role')
   element.removeAttribute('hidden')
 })
+
+// Main volume fader
+engine.audio.mixer.master.param.gain.value = engine.const.zeroGain
+
+app.state.screen.on('enter-game', () => {
+  engine.audio.ramp.linear(engine.audio.mixer.master.param.gain, 1, 1)
+})
