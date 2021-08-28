@@ -1,5 +1,6 @@
 # Chimera
-An interactive stochastic music generator developed with [syngen](https://github.com/nicross/syngen).
+An interactive stochastic music generator created for [Rainbow Jam 2021](https://itch.io/jam/rainbowjam21).
+Developed with [syngen](https://github.com/nicross/syngen).
 
 ## Getting started
 To get started, please  use [npm](https://nodejs.org) to install the required dependencies:

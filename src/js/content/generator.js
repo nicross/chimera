@@ -1,4 +1,4 @@
-content.chunks = (() => {
+content.generator = (() => {
   const chunks = engine.utility.quadtree.create()
 
   content.utility.ephemera.manage(chunks)
@@ -24,7 +24,7 @@ engine.loop.on('frame', ({paused}) => {
     return
   }
 
-  content.chunks.update()
+  content.generator.update()
 })
 
-engine.state.on('reset', () => content.chunks.reset())
+engine.state.on('reset', () => content.generator.reset())

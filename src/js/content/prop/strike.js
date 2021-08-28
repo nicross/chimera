@@ -1,5 +1,5 @@
-content.prop.note = engine.prop.base.invent({
-  name: 'note',
+content.prop.strike = engine.prop.base.invent({
+  name: 'strike',
   onConstruct: function (options) {
     this.play(options).then(() => this.destroy())
   },
