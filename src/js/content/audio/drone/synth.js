@@ -12,17 +12,30 @@ content.audio.drone.synth.prototype = {
     this.frequency = content.const.frequencies[note]
     this.note = note
 
-    // TODO: Create synth
+    this.synth = engine.audio.synth.createSimple({
+      frequency: this.frequency,
+    }).connect(destination)
+
+    const now = engine.audio.time()
+
+    this.synth.param.gain.linearRampToValueAtTime(1/8, now + 1/16)
+    this.synth.param.gain.linearRampToValueAtTime(engine.const.zeroGain, now + 16)
 
     return this
   },
   destroy: function () {
-    // TODO: Teardown synth
+    const now = engine.audio.time()
+
+    engine.audio.ramp.linear(this.synth.param.gain, engine.const.zeroGain, 1/8)
+    this.synth.stop(now + 1)
 
     return this
   },
   bump: function () {
-    // TODO: Randomize synth
+    const now = engine.audio.time()
+    
+    engine.audio.ramp.linear(this.synth.param.gain, 1/8, 1/16)
+    this.synth.param.gain.linearRampToValueAtTime(engine.const.zeroGain, now + 16)
 
     return this
   },

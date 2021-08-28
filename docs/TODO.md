@@ -1,5 +1,5 @@
 # TODO
-- Drone synths
+- Drone synth enhancements
 - Drone filter that colors each space
 - Footsteps
 - Foilage / transient noise

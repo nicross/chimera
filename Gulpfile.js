@@ -169,6 +169,7 @@ function getContentJs() {
     'src/js/content/utility/*.js',
     'src/js/content/*.js',
     'src/js/content/*/*.js',
+    'src/js/content/*/*/*.js',
   ]
 
   return srcs

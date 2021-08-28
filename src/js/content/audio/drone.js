@@ -1,8 +1,10 @@
 content.audio.drone = (() => {
   const bus = content.audio.createBus(),
-    maxNotes = 12,
+    maxNotes = 8,
     notes = [],
     synths = new Map()
+
+  bus.gain.value = engine.utility.fromDb(-15)
 
   function bump(note) {
     const index = notes.indexOf(note),
@@ -63,5 +65,9 @@ content.audio.drone = (() => {
     },
   }
 })()
+
+engine.ready(() => {
+  content.audio.strikes.on('strike', (note) => content.audio.drone.push(note))
+})
 
 engine.state.on('reset', () => content.audio.drone.reset())

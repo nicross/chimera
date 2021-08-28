@@ -27,7 +27,7 @@ content.generator.chord = (() => {
 
   function generateChords() {
     const srand = engine.utility.srand('generator', 'chord', 'chords')
-    const count = Math.round(srand(4, 8))
+    const count = Math.round(srand(6, 12))
 
     chords.length = 0
 
