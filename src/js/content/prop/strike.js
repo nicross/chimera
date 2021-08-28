@@ -1,21 +1,26 @@
 content.prop.strike = engine.prop.base.invent({
   name: 'strike',
-  onConstruct: function (options) {
-    this.play(options).then(() => this.destroy())
-  },
   play: function ({
-    // TODO: Parameters
+    frequency = 0,
+    velocity = 0,
   } = {}) {
-    // TODO: Duration
-    const duration = 0
+    const duration = engine.utility.lerp(1/8, 1, velocity)
 
     const synth = engine.audio.synth.createFm({
-      // TODO: Parameters
+      carrierDetune: engine.utility.random.float(-10, 10),
+      carrierFrequency: frequency,
+      modDepth: frequency / 2,
+      modDetune: engine.utility.random.float(150, 250),
+      modFrequency: frequency * 3,
+      modType: 'sawtooth',
+    }).filtered({
+      frequency: frequency * 6,
     }).connect(this.output)
 
     const now = engine.audio.time()
 
-    // TODO: Automation
+    synth.param.gain.linearRampToValueAtTime(1, now + duration/8)
+    synth.param.gain.exponentialRampToValueAtTime(engine.const.zeroGain, now + duration)
 
     synth.stop(now + duration)
 
