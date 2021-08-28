@@ -23,7 +23,7 @@ app.screen.game = (() => {
         x: 0,
         y: 0,
       },
-      seed: new Date(),
+      seed: 'Sat Aug 28 2021 18:05:01 GMT-0500 (Central Daylight Time)' || new Date(),
     })
 
     engine.loop.resume()
