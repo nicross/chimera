@@ -7,7 +7,7 @@ content.audio.wind = (() => {
   bus.gain.value = engine.utility.fromDb(-9)
 
   function calculateFrequency(strength) {
-    return engine.utility.lerpExp(10, 200, strength, 3)
+    return engine.utility.lerpExp(20, 200, strength, 4)
   }
 
   function calculatePan(angle) {
@@ -26,7 +26,7 @@ content.audio.wind = (() => {
       strength = content.wind.strength(position.x, position.y)
 
     synth = engine.audio.synth.createBuffer({
-      buffer: engine.audio.buffer.noise.pink(),
+      buffer: engine.audio.buffer.noise.brown(),
       gain: 1,
     }).filtered({
       frequency: calculateFrequency(strength),
