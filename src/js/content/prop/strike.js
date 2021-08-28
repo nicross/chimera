@@ -14,7 +14,7 @@ content.prop.strike = engine.prop.base.invent({
       modFrequency: frequency * 3,
       modType: 'sawtooth',
     }).filtered({
-      frequency: frequency * 6,
+      frequency: frequency * 12,
     }).connect(this.output)
 
     const now = engine.audio.time()

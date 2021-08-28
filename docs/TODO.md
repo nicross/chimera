@@ -1,5 +1,4 @@
 # TODO
-- Chord module that generates new chords each seed
 - Drone synths
 - Drone filter that colors each space
 - Footsteps
