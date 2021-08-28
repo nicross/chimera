@@ -47,7 +47,7 @@ content.audio.footsteps = (() => {
       modDepth: modDepth,
       modFrequency: engine.utility.random.float(4, 8),
     }).filtered({
-      frequency: engine.utility.lerp(80, 160, velocity),
+      frequency: engine.utility.lerp(150, 300, velocity),
     })
 
     const binaural = engine.audio.binaural.create({
