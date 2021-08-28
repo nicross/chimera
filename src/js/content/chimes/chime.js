@@ -14,12 +14,10 @@ content.chimes.chime.prototype = {
     this.x = x
     this.y = y
 
-    this.lastStrike = 0
-
     return this
   },
-  strike: function () {
-    lastStrike = performance.now()
+  onStrike: function () {
+    this.lastStrike = content.time.value()
 
     return this
   },

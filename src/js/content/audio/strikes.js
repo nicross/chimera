@@ -34,6 +34,8 @@ content.audio.strikes = (() => {
       engine.props.destroy(prop)
     })
 
+    chime.onStrike()
+
     pubsub.emit('strike', note)
   }
 

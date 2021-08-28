@@ -1,7 +1,7 @@
 content.generator.chord = (() => {
   return {
     value: () => {
-      return [69]
+      return [57, 69, 73, 76, 82, 84]
     },
   }
 })()

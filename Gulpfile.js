@@ -156,6 +156,7 @@ function getAppJs() {
     'src/js/app.js',
     'src/js/app/*.js',
     'src/js/app/*/*.js',
+    'src/js/app/*/*/*.js',
   ]
 
   return srcs
