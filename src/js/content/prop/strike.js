@@ -4,7 +4,7 @@ content.prop.strike = engine.prop.base.invent({
     frequency = 0,
     velocity = 0,
   } = {}) {
-    const duration = engine.utility.lerp(1/8, 1, velocity)
+    const duration = engine.utility.lerp(1/8, 1/2, velocity)
 
     const synth = engine.audio.synth.createFm({
       carrierDetune: engine.utility.random.float(-10, 10),
@@ -19,7 +19,8 @@ content.prop.strike = engine.prop.base.invent({
 
     const now = engine.audio.time()
 
-    synth.param.gain.linearRampToValueAtTime(1, now + engine.utility.random.float(1/64, 1/32))
+    synth.param.gain.exponentialRampToValueAtTime(1, now + engine.utility.random.float(1/64, 1/48))
+    synth.param.gain.exponentialRampToValueAtTime(1, now + engine.utility.random.float(1/48, 1/32))
     synth.param.gain.exponentialRampToValueAtTime(engine.const.zeroGain, now + duration)
 
     synth.stop(now + duration)
