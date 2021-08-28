@@ -6,6 +6,7 @@ content.generator = (() => {
 
   function createChunk(options) {
     const chunk = content.generator.chunk.create({
+      count: content.generator.density.value(options.x, options.y),
       size: chunkSize,
       ...options,
     })
@@ -34,6 +35,7 @@ content.generator = (() => {
   }
 
   return {
+    chunks: () => [...chunks],
     reset: function () {
       for (const chunk of chunks) {
         chunk.destroy()

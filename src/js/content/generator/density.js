@@ -4,11 +4,17 @@ content.generator.density = (() => {
     type: engine.utility.simplex2d,
   })
 
-  const scale = 200 / engine.utility.simplex2d.prototype.skewFactor
+  const scale = 4 / engine.utility.simplex2d.prototype.skewFactor
 
   content.utility.ephemera.manage(noise)
 
   return {
-    value: (x, y) => noise.value(x / scale, y / scale),
+    value: (x, y) => {
+      const value = noise.value(x / scale, y / scale)
+
+      return Math.round(
+        engine.utility.lerp(4, 20, value)
+      )
+    },
   }
 })()

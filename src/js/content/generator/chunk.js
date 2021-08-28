@@ -16,6 +16,8 @@ content.generator.chunk.prototype = {
     this.x = x
     this.y = y
 
+    this.generate()
+
     return this
   },
   destroy: function () {
