@@ -9,6 +9,7 @@ content.chimes.chime.prototype = {
     notes = [],
     x = 0,
     y = 0,
+    z = 0,
   } = {}) {
     this.swayFrequency = engine.utility.random.float(1/8, 1)
     this.swaySign = engine.utility.random.sign()
@@ -16,6 +17,7 @@ content.chimes.chime.prototype = {
     this.notes = notes
     this.x = x
     this.y = y
+    this.z = z
 
     return this
   },

@@ -25,6 +25,7 @@ content.audio.strikes = (() => {
       destination: bus,
       x: chime.x,
       y: chime.y,
+      z: chime.z,
     })
 
     prop.play({

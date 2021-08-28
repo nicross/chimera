@@ -34,12 +34,13 @@ content.generator.chunk.prototype = {
       const srand = engine.utility.srand('chunk', this.x, this.y, 'chime', i)
 
       const x = (this.x * this.size) + (srand(0, this.size)),
-        y = (this.y * this.size)  + (srand(0, this.size))
+        y = (this.y * this.size) + (srand(0, this.size))
 
       const chime = content.chimes.chime.create({
         notes: content.generator.chord.value(x, y),
         x,
         y,
+        z: srand(1, 3),
       })
 
       this.chimes.push(chime)
