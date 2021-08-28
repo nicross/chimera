@@ -1,18 +1,51 @@
 content.generator = (() => {
-  const chunks = engine.utility.quadtree.create()
+  const chunks = [],
+    chunkSize = 50,
+    chunkTree = engine.utility.quadtree.create(),
+    streamRadius = 3
 
-  content.utility.ephemera.manage(chunks)
+  function createChunk(options) {
+    const chunk = content.generator.chunk.create({
+      size: chunkSize,
+      ...options,
+    })
+
+    chunks.push(chunk)
+    chunkTree.insert(chunk)
+  }
+
+  function getChunk(x, y) {
+    return chunkTree.find({x, y}, engine.const.zero)
+  }
+
+  function streamChunks() {
+    const position = engine.position.getVector()
+
+    const xi = Math.floor(position.x / chunkSize),
+      yi = Math.floor(position.y / chunkSize)
+
+    for (let x = xi - streamRadius; x <= xi + streamRadius; x += 1) {
+      for (let y = yi - streamRadius; y <= yi + streamRadius; y += 1) {
+        if (!getChunk(x, y)) {
+          createChunk({x, y})
+        }
+      }
+    }
+  }
 
   return {
     reset: function () {
-      chunks.clear()
+      for (const chunk of chunks) {
+        chunk.destroy()
+      }
+
+      chunks.length = 0
+      chunkTree.clear()
+
       return this
     },
     update: function () {
-      const position = engine.position.getVector()
-
-      // TODO: Determine nearby chunks via position
-      // TODO: Create nearby unspawned chunks
+      streamChunks()
 
       return this
     },

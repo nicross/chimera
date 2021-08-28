@@ -1,6 +1,5 @@
 # TODO
 - Chord module that generates new chords each seed
-- Chunk streaming
 - Drone synths
 - Strike synths
 - Graphics
