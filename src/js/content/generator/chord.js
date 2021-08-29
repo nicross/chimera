@@ -70,7 +70,7 @@ content.generator.chord = (() => {
       return this
     },
     value: (x, y) => {
-      const chordValue = chordField.value(x / chordScale, y / chordScale)
+      const chordValue = engine.utility.wrapAlternate(chordField.value(x / chordScale, y / chordScale) * 3, 0, 1)
 
       const chord = engine.utility.choose(chords, chordValue).map((note, index) => {
         const inversionValue = inversionField.value(x / inversionScale, y / inversionField, index)
