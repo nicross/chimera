@@ -28,7 +28,7 @@ content.audio.wind = (() => {
   }
 
   function calculateHighGain(strength) {
-    return engine.utility.fromDb(engine.utility.lerp(-36, -27, strength))
+    return engine.utility.fromDb(engine.utility.lerp(-39, -30, strength))
   }
 
   function calculateLowFrequency(strength) {
@@ -36,7 +36,7 @@ content.audio.wind = (() => {
   }
 
   function calculateQ(strength) {
-    return engine.utility.lerpExp(20, 0.001, strength)
+    return engine.utility.lerpExp(10, 0.001, strength)
   }
 
   function calculatePan(angle) {

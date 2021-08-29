@@ -1,12 +1,12 @@
 content.wind = (() => {
   const angle = engine.utility.createNoiseWithOctaves({
-    octaves: 4,
+    octaves: 8,
     seed: ['wind', 'angle'],
     type: engine.utility.simplex3d,
   })
 
   const strength = engine.utility.createNoiseWithOctaves({
-    octaves: 4,
+    octaves: 8,
     seed: ['wind', 'strength'],
     type: engine.utility.simplex3d,
   })

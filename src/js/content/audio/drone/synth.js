@@ -48,7 +48,7 @@ content.audio.drone.synth.prototype = {
   },
   calculateGain: function (chime) {
     const distance = engine.position.getVector().distance(chime),
-      ratio = engine.utility.distanceToPower(distance / 8)
+      ratio = engine.utility.distanceToPower(distance / 10)
 
     if (!this.lastStrikeGain || !this.lastStrikeTime) {
       return ratio
