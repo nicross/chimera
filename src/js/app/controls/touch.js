@@ -1,4 +1,4 @@
-app.controls.mouse = (() => {
+app.controls.touch = (() => {
   let touched = false
 
   window.addEventListener('touchend', onTouchend)

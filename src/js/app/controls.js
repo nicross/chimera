@@ -16,6 +16,7 @@ app.controls = (() => {
       ...app.controls.gamepad.game(),
       ...app.controls.keyboard.game(),
       ...app.controls.mouse.game(),
+      ...app.controls.touch.game(),
     }
   }
 
@@ -24,6 +25,7 @@ app.controls = (() => {
       ...app.controls.gamepad.ui(),
       ...app.controls.keyboard.ui(),
       ...app.controls.mouse.ui(),
+      ...app.controls.touch.ui(),
     }
 
     uiDelta = {}
