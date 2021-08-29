@@ -1,5 +1,5 @@
 # Chimera
-An interactive stochastic music generator created for [Rainbow Jam 2021](https://itch.io/jam/rainbowjam21).
+An explorable stochastic music generator submitted to [Rainbow Jam 2021](https://itch.io/jam/rainbowjam21) and [Brackeys Game Jam 2021.2](https://itch.io/jam/brackeys-6).
 Developed with [syngen](https://github.com/nicross/syngen).
 
 ## Getting started
