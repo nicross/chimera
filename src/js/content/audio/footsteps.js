@@ -1,12 +1,13 @@
 content.audio.footsteps = (() => {
-  const bus = content.audio.createBus()
+  const bus = content.audio.createBus(),
+    strideLength = 2
 
   let isLeft,
     lastAngle,
     lastStep,
     lastVelocity
 
-  bus.gain.value = engine.utility.fromDb(-7.5)
+  bus.gain.value = engine.utility.fromDb(-12)
 
   function shouldStep() {
     // Complete stop
@@ -22,8 +23,6 @@ content.audio.footsteps = (() => {
       ...engine.position.getVector(),
       z: 0,
     })
-
-    const strideLength = 2
 
     if (distance >= strideLength) {
       return true
@@ -47,6 +46,7 @@ content.audio.footsteps = (() => {
       modDepth: modDepth,
       modFrequency: engine.utility.random.float(4, 8),
     }).filtered({
+      detune: engine.utility.random.float(-10, 10),
       frequency: engine.utility.lerp(150, 300, velocity),
     })
 
