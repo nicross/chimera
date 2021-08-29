@@ -56,7 +56,7 @@ content.audio.strikes = (() => {
 
       const windStrength = content.wind.strength()
 
-      const chance = engine.utility.lerpExp(1/16, 8, windStrength, 2) / engine.performance.fps(),
+      const chance = engine.utility.lerpExp(1/16, 16, windStrength, 3) / engine.performance.fps(),
         roll = Math.random()
 
       if (roll < chance) {
