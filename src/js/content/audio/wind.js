@@ -1,5 +1,7 @@
 content.audio.wind = (() => {
-  const bus = content.audio.createBus()
+  const bus = content.audio.createBus(),
+    context = engine.audio.context(),
+    synths = []
 
   const modDepthField = engine.utility.createNoiseWithOctaves({
     octaves: 4,
@@ -17,8 +19,7 @@ content.audio.wind = (() => {
     timeScale = 2 / engine.utility.simplex2d.prototype.skewFactor
 
   let binaural,
-    binauralSynth,
-    synth
+    binauralSynth
 
   bus.gain.value = engine.utility.fromDb(-9)
 
@@ -27,7 +28,7 @@ content.audio.wind = (() => {
   }
 
   function calculateHighGain(strength) {
-    return engine.utility.fromDb(engine.utility.lerp(-34.5, -25.5, strength))
+    return engine.utility.fromDb(engine.utility.lerp(-36, -27, strength))
   }
 
   function calculateLowFrequency(strength) {
@@ -64,18 +65,29 @@ content.audio.wind = (() => {
       calculatePan(angle)
     ).from(binauralSynth).to(bus)
 
-    const modDepth = getModDepth()
+    const highFrequency = calculateHighFrequency(strength),
+      highGain = calculateHighGain(strength),
+      modDepth = getModDepth(),
+      modFrequency = getModFrequency(),
+      q = calculateQ(strength)
 
-    synth = engine.audio.synth.createAmBuffer({
-      buffer: engine.audio.buffer.noise.white(),
-      carrierGain: 1 - modDepth,
-      gain: calculateHighGain(strength),
-      modDepth: modDepth,
-      modFrequency: getModFrequency(),
-    }).filtered({
-      frequency: calculateHighFrequency(strength),
-      Q: calculateQ(strength),
-    }).connect(bus)
+    for (const pan of [-1, 1]) {
+      const synth = engine.audio.synth.createAmBuffer({
+        buffer: engine.audio.buffer.noise.white(),
+        carrierGain: 1 - modDepth,
+        gain: highGain,
+        modDepth: modDepth,
+        modDetune: 100 * pan,
+        modFrequency: modFrequency,
+      }).filtered({
+        frequency: highFrequency,
+        Q: q,
+      }).chainAssign('panner', context.createStereoPanner()).connect(bus)
+
+      synth.panner.pan.value = pan
+
+      synths.push(synth)
+    }
   }
 
   function destroySynth() {
@@ -89,10 +101,11 @@ content.audio.wind = (() => {
       binaural = null
     }
 
-    if (synth) {
+    for (const synth of synths) {
       synth.stop()
-      synth = null
     }
+
+    synths.length = 0
   }
 
   function getModDepth() {
@@ -118,17 +131,25 @@ content.audio.wind = (() => {
       strength = content.wind.strength(position.x, position.y)
 
     const lowFrequency = calculateLowFrequency(strength),
-      modDepth = getModDepth(),
       pan = calculatePan(angle)
 
     engine.audio.ramp.set(binauralSynth.filter.frequency, lowFrequency)
     binaural.update(pan)
 
-    engine.audio.ramp.set(synth.filter.frequency, calculateHighFrequency(strength))
-    engine.audio.ramp.set(synth.filter.Q, calculateQ(strength))
-    engine.audio.ramp.set(synth.param.carrierGain, 1 - modDepth)
-    engine.audio.ramp.set(synth.param.gain, calculateHighGain(strength))
-    engine.audio.ramp.set(synth.param.mod.depth, modDepth)
+    const highFrequency = calculateHighFrequency(strength),
+      highGain = calculateHighGain(strength),
+      modDepth = getModDepth(),
+      modFrequency = getModFrequency(),
+      q = calculateQ(strength)
+
+    for (const synth of synths) {
+      engine.audio.ramp.set(synth.filter.frequency, highFrequency)
+      engine.audio.ramp.set(synth.filter.Q, q)
+      engine.audio.ramp.set(synth.param.carrierGain, 1 - modDepth)
+      engine.audio.ramp.set(synth.param.gain, highGain)
+      engine.audio.ramp.set(synth.param.mod.depth, modDepth)
+      engine.audio.ramp.set(synth.param.mod.frequency, modFrequency)
+    }
   }
 
   return {
@@ -138,7 +159,7 @@ content.audio.wind = (() => {
       return this
     },
     update: function () {
-      if (!binaural || !binauralSynth || !synth) {
+      if (!binaural) {
         createSynth()
       }
 
