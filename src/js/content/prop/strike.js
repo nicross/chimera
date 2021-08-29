@@ -4,7 +4,7 @@ content.prop.strike = engine.prop.base.invent({
     frequency = 0,
     velocity = 0,
   } = {}) {
-    const duration = engine.utility.lerp(1/8, 1/2, velocity)
+    const duration = engine.utility.lerp(1/2, 1, velocity)
 
     const synth = engine.audio.synth.createFm({
       carrierDetune: engine.utility.random.float(-10, 10),

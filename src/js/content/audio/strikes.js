@@ -37,7 +37,10 @@ content.audio.strikes = (() => {
 
     chime.onStrike()
 
-    pubsub.emit('strike', note)
+    pubsub.emit('strike', {
+      chime,
+      note,
+    })
   }
 
   return engine.utility.pubsub.decorate({

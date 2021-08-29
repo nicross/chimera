@@ -1,23 +1,30 @@
 content.audio.drone = (() => {
   const bus = content.audio.createBus(),
-    maxNotes = 8,
+    maxNotes = 16,
     notes = [],
     synths = new Map()
 
-  bus.gain.value = engine.utility.fromDb(-15)
+  const reverb = engine.audio.mixer.send.reverb.create({
+    x: 0,
+    y: 0,
+    z: 1,
+  }).from(bus)
 
-  function bump(note) {
+  bus.gain.value = engine.utility.fromDb(-18)
+
+  function bump(note, chime) {
     const index = notes.indexOf(note),
       synth = synths.get(note)
 
     notes.splice(index, 1)
     notes.push(note)
 
-    synth.bump()
+    synth.onStrike(chime)
   }
 
-  function createSynth(note) {
+  function createSynth(note, chime) {
     const synth = content.audio.drone.synth.create({
+      chime,
       destination: bus,
       note,
     })
@@ -32,9 +39,9 @@ content.audio.drone = (() => {
     synths.delete(note)
   }
 
-  function push(note) {
+  function push(note, chime) {
     notes.push(note)
-    createSynth(note)
+    createSynth(note, chime)
 
     if (notes.length > maxNotes) {
       const destroy = notes.shift()
@@ -43,11 +50,15 @@ content.audio.drone = (() => {
   }
 
   return {
-    push: function (note) {
+    notes: () => notes,
+    push: function ({
+      chime,
+      note,
+    }) {
       if (notes.includes(note)) {
-        bump(note)
+        bump(note, chime)
       } else {
-        push(note)
+        push(note, chime)
       }
 
       return this
@@ -67,7 +78,7 @@ content.audio.drone = (() => {
 })()
 
 engine.ready(() => {
-  content.audio.strikes.on('strike', (note) => content.audio.drone.push(note))
+  content.audio.strikes.on('strike', (...args) => content.audio.drone.push(...args))
 })
 
 engine.state.on('reset', () => content.audio.drone.reset())
