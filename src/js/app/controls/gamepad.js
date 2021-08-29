@@ -59,6 +59,14 @@ app.controls.gamepad = {
       state.confirm = true
     }
 
+    if (engine.input.gamepad.isDigital(0)) {
+      state.automove = true
+    }
+
+    if (engine.input.gamepad.isDigital(1)) {
+      state.randomize = true
+    }
+
     if (engine.input.gamepad.isDigital(12)) {
       y = 1
     }

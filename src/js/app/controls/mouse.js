@@ -76,7 +76,14 @@ app.controls.mouse = (() => {
       return state
     },
     ui: function () {
-      return {}
+      const mouse = engine.input.mouse.get(),
+        state = {}
+
+      if (mouse.button[1]) {
+        state.automove = true
+      }
+
+      return state
     },
   }
 })()

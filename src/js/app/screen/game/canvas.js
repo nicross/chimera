@@ -23,6 +23,7 @@ app.screen.game.canvas = (() => {
 
     app.state.screen.on('enter-game', onEnter)
     app.state.screen.on('exit-game', onExit)
+    engine.state.on('import', onImport)
   })
 
   function calculateColors(time) {
@@ -121,14 +122,6 @@ app.screen.game.canvas = (() => {
   }
 
   function onEnter() {
-    const srand = engine.utility.srand('canvas');
-
-    analogPhase = srand(0, 41)
-    analogSide = engine.utility.sign(srand(-1, 1))
-    analogSign = engine.utility.sign(srand(-1, 1))
-    rotatePhase = srand(0, 311)
-    rotateSign = engine.utility.sign(srand(-1, 1))
-
     clear()
     engine.loop.on('frame', onFrame)
   }
@@ -139,6 +132,16 @@ app.screen.game.canvas = (() => {
 
   function onFrame() {
     draw()
+  }
+
+  function onImport() {
+    const srand = engine.utility.srand('canvas')
+
+    analogPhase = srand(0, 41)
+    analogSide = engine.utility.sign(srand(-1, 1))
+    analogSign = engine.utility.sign(srand(-1, 1))
+    rotatePhase = srand(0, 311)
+    rotateSign = engine.utility.sign(srand(-1, 1))
   }
 
   function onResize() {

@@ -10,6 +10,10 @@ content.time = (() => {
       time = 0
       return this
     },
+    set: function (value) {
+      time = value
+      return this
+    },
     value: () => time,
   }
 })()
@@ -22,4 +26,5 @@ engine.loop.on('frame', ({delta, paused}) => {
   content.time.increment(delta)
 })
 
+engine.state.on('import', ({time}) => content.time.set(time))
 engine.state.on('reset', () => content.time.reset())

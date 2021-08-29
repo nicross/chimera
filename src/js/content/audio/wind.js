@@ -81,14 +81,17 @@ content.audio.wind = (() => {
   function destroySynth() {
     if (binauralSynth) {
       binauralSynth.stop()
+      binauralSynth = null
     }
 
     if (binaural) {
       binaural.destroy()
+      binaural = null
     }
 
     if (synth) {
       synth.stop()
+      synth = null
     }
   }
 
@@ -135,7 +138,7 @@ content.audio.wind = (() => {
       return this
     },
     update: function () {
-      if (!binauralSynth) {
+      if (!binaural || !binauralSynth || !synth) {
         createSynth()
       }
 

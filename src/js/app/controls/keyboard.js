@@ -66,6 +66,14 @@ app.controls.keyboard = {
       state.up = true
     }
 
+    if (keys.KeyF) {
+      state.automove = true
+    }
+
+    if (keys.KeyR) {
+      state.randomize = true
+    }
+
     return state
   },
 }

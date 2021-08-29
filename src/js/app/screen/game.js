@@ -1,5 +1,6 @@
 app.screen.game = (() => {
-  let root
+  let automove = false,
+    root
 
   engine.ready(() => {
     root = document.querySelector('.a-game')
@@ -10,7 +11,28 @@ app.screen.game = (() => {
   })
 
   function handleControls() {
-    const game = app.controls.game()
+    const game = app.controls.game(),
+      ui = app.controls.ui()
+
+    if (ui.randomize) {
+      engine.state.import({
+        position: {
+          x: 0,
+          y: 0,
+        },
+        seed: new Date(),
+        time: Math.random() * 60,
+      })
+    }
+
+    if (ui.automove) {
+      automove = !automove
+    }
+
+    if (automove) {
+      game.y = 1
+    }
+
     content.movement.update(game)
   }
 
@@ -23,7 +45,8 @@ app.screen.game = (() => {
         x: 0,
         y: 0,
       },
-      seed: 'Sat Aug 28 2021 18:05:01 GMT-0500 (Central Daylight Time)' || new Date(),
+      seed: app.const.defaultSeed,
+      time: 0,
     })
 
     engine.loop.resume()

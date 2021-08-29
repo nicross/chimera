@@ -21,7 +21,7 @@ content.generator.chunk.prototype = {
     return this
   },
   destroy: function () {
-    for (const chime of chimes) {
+    for (const chime of this.chimes) {
       content.chimes.deregister(chime)
     }
 

@@ -55,7 +55,7 @@ content.audio.drone = (() => {
     reset: function () {
       notes.length = 0
 
-      for (const synth of synths) {
+      for (const synth of synths.values()) {
         synth.destroy()
       }
 
