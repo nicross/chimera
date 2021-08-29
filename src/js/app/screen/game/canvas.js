@@ -68,7 +68,10 @@ app.screen.game.canvas = (() => {
     } = calculateColors(now)
 
     // Fill background
-    context.fillStyle = `hsl(${background.h}, ${background.s * 100}%,  ${background.l * 100}%)`
+    const gradient = context.createLinearGradient(0, 0, 0, height)
+    gradient.addColorStop(0, `hsl(${background.h}, ${background.s * 100}%,  ${background.l * 100}%)`)
+    gradient.addColorStop(1, `hsl(${foreground.h}, ${background.s * 100}%,  ${background.l * 100}%)`)
+    context.fillStyle = gradient
     context.fillRect(0, 0, width, height)
 
     // Set foreground color

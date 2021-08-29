@@ -1,6 +1,5 @@
 # TODO
-- Drone filter that colors each space
-- Submit to Rainbow Jam 2021 (possibly Brackeys Game Jam 2021.2)
+- Drone modifiers via position/time
 
 ## Nice seeds
 - `Sat Aug 28 2021 18:05:01 GMT-0500 (Central Daylight Time)`
